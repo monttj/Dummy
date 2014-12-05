@@ -28,15 +28,15 @@ puppi =  puppi = cms.EDProducer("PuppiProducer",#cms.PSet(#"PuppiProducer",
                        PuppiName      = cms.untracked.string("Puppi"),
                        UseDeltaZCut   = cms.untracked.bool  (True),
                        DeltaZCut      = cms.untracked.double(0.2),
-                       #candName       = cms.untracked.string('particleFlow'),
-                       #vertexName     = cms.untracked.string('offlinePrimaryVertices'),
-                       candName      = cms.untracked.string('packedPFCandidates'),
-                       vertexName     = cms.untracked.string('offlineSlimmedPrimaryVertices'),
+                       candName       = cms.untracked.string('particleFlow'),
+                       vertexName     = cms.untracked.string('offlinePrimaryVertices'),
+                       #candName      = cms.untracked.string('packedPFCandidates'),
+                       #vertexName     = cms.untracked.string('offlineSlimmedPrimaryVertices'),
                        applyCHS       = cms.untracked.bool  (True),
                        useExp         = cms.untracked.bool  (False),
                        MinPuppiWeight = cms.untracked.double(0.01),
-                       algos          = cms.VPSet( 
-                        cms.PSet( 
+                       algos          = cms.VPSet(
+                        cms.PSet(
                          etaMin = cms.untracked.double(0.),
                          etaMax = cms.untracked.double( 2.5),
                          ptMin  = cms.untracked.double(0.),
@@ -44,7 +44,7 @@ puppi =  puppi = cms.EDProducer("PuppiProducer",#cms.PSet(#"PuppiProducer",
                          MinNeutralPtSlope   = cms.untracked.double(0.02),
                          puppiAlgos = puppiCentral
                         ),
-                        cms.PSet( 
+                        cms.PSet(
                          etaMin = cms.untracked.double(2.5),
                          etaMax = cms.untracked.double(3.0),
                          ptMin  = cms.untracked.double(0.0),
@@ -52,7 +52,7 @@ puppi =  puppi = cms.EDProducer("PuppiProducer",#cms.PSet(#"PuppiProducer",
                          MinNeutralPtSlope   = cms.untracked.double(0.005),
                          puppiAlgos = puppiForward
                         ),
-                        cms.PSet( 
+                        cms.PSet(
                          etaMin = cms.untracked.double(3.0),
                          etaMax = cms.untracked.double(10.0),
                          ptMin  = cms.untracked.double(0.0),

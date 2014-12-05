@@ -12,8 +12,6 @@
  #include "FWCore/ParameterSet/interface/ParameterSet.h"
  #include "DataFormats/Common/interface/View.h"
  #include "DataFormats/Candidate/interface/Candidate.h"
- #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
- #include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
  #include "DataFormats/VertexReco/interface/VertexFwd.h"
  #include "DataFormats/VertexReco/interface/Vertex.h"
  #include "DataFormats/GsfTrackReco/interface/GsfTrack.h"
@@ -67,31 +65,22 @@ void PuppiProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
    double pD0    = -9999; 
    int    pVtxId = -9999; 
    bool lFirst = true;
-   const pat::PackedCandidate *lPack = dynamic_cast<const pat::PackedCandidate*>(&(*itPF));
-   if(lPack == 0 ) { 
-     const reco::PFCandidate *pPF = dynamic_cast<const reco::PFCandidate*>(&(*itPF));
-     for(reco::VertexCollection::const_iterator iV = pvCol->begin(); iV!=pvCol->end(); ++iV) {
-      if(lFirst) { 
-        if      ( pPF->trackRef().isNonnull()    ) pDZ = pPF->trackRef()   ->dz(iV->position());
-        else if ( pPF->gsfTrackRef().isNonnull() ) pDZ = pPF->gsfTrackRef()->dz(iV->position());
-        if      ( pPF->trackRef().isNonnull()    ) pD0 = pPF->trackRef()   ->d0();
-        else if ( pPF->gsfTrackRef().isNonnull() ) pD0 = pPF->gsfTrackRef()->d0();
-        lFirst = false;
-        if(pDZ > -9999) pVtxId = 0; 
-      }
-      if(iV->trackWeight(pPF->trackRef())>0) {
-        closestVtx  = &(*iV);
-        break;
-      }
-      pVtxId++;
-    }
-  } else if(lPack->vertexRef().isNonnull() )  {
-   pDZ        = lPack->dz(); 
-   pD0        = lPack->dxy(); 
-   closestVtx = &(*(lPack->vertexRef()));
-   pVtxId     = (lPack->fromPV() !=  (pat::PackedCandidate::PVUsedInFit));
-   if(lPack->fromPV() ==  (pat::PackedCandidate::PVLoose || pat::PackedCandidate::PVTight)) closestVtx = 0;
- }
+   const reco::PFCandidate *pPF = dynamic_cast<const reco::PFCandidate*>(&(*itPF));
+   for(reco::VertexCollection::const_iterator iV = pvCol->begin(); iV!=pvCol->end(); ++iV) {
+     if(lFirst) { 
+       if      ( pPF->trackRef().isNonnull()    ) pDZ = pPF->trackRef()   ->dz(iV->position());
+       else if ( pPF->gsfTrackRef().isNonnull() ) pDZ = pPF->gsfTrackRef()->dz(iV->position());
+       if      ( pPF->trackRef().isNonnull()    ) pD0 = pPF->trackRef()   ->d0();
+       else if ( pPF->gsfTrackRef().isNonnull() ) pD0 = pPF->gsfTrackRef()->d0();
+       lFirst = false;
+       if(pDZ > -9999) pVtxId = 0; 
+     }
+     if(iV->trackWeight(pPF->trackRef())>0) {
+       closestVtx  = &(*iV);
+       break;
+     }
+     pVtxId++;
+   }
  pReco.dZ      = pDZ;
  pReco.d0      = pD0;
 

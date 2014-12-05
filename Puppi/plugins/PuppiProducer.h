@@ -12,6 +12,7 @@
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "DataFormats/Math/interface/PtEtaPhiMass.h"
+#include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
 #include "Dummy/Puppi/interface/PuppiContainer.h"
 
 // ------------------------------------------------------------------------------------------
