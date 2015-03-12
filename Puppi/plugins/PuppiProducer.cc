@@ -10,6 +10,7 @@
  #include "FWCore/Framework/interface/ESHandle.h"
  #include "FWCore/Framework/interface/EventSetup.h"
  #include "FWCore/ParameterSet/interface/ParameterSet.h"
+ #include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
  #include "DataFormats/Common/interface/View.h"
  #include "DataFormats/Candidate/interface/Candidate.h"
  #include "DataFormats/VertexReco/interface/VertexFwd.h"
@@ -30,6 +31,7 @@ PuppiProducer::PuppiProducer(const edm::ParameterSet& iConfig) {
  fPuppiContainer = new PuppiContainer(iConfig);
  fPFName    = iConfig.getUntrackedParameter<std::string>("candName"  ,"particleFlow");
  fPVName    = iConfig.getUntrackedParameter<std::string>("vertexName","offlinePrimaryVertices");
+ fPFCands =  iConfig.getParameter<edm::InputTag>("PFcandName");
  produces<edm::ValueMap<float> > ("PuppiWeights");
  produces<reco::PFCandidateCollection>(fPuppiName);
 }
@@ -41,7 +43,8 @@ void PuppiProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
 
    // Get PFCandidate Collection
  edm::Handle<CandidateView> hPFProduct;
- iEvent.getByLabel(fPFName,hPFProduct);
+ //iEvent.getByLabel(fPFName,hPFProduct);
+ iEvent.getByLabel(fPFCands,hPFProduct);
  assert(hPFProduct.isValid());
  const reco::CandidateView *PFCol = hPFProduct.product();
 

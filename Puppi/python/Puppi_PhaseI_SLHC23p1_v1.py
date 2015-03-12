@@ -33,7 +33,7 @@ puppiForward = cms.VPSet(
 #                 )
                 )
 
-puppi = cms.EDProducer("PuppiProducer",#cms.PSet(#"PuppiProducer",
+puppi = cms.EDProducer("PuppiProducer",
                        PuppiName      = cms.untracked.string("Puppi"),
                        UseDeltaZCut   = cms.untracked.bool  (True),
                        DeltaZCut      = cms.untracked.double(0.3),
@@ -77,7 +77,7 @@ puppi = cms.EDProducer("PuppiProducer",#cms.PSet(#"PuppiProducer",
                         cms.PSet(
                          etaMin = cms.untracked.double(3.0),
                          etaMax = cms.untracked.double(5.0),
-                         ptMin  = cms.untracked.double(1.5),
+                         ptMin  = cms.untracked.double(4.0),
                          MinNeutralPt   = cms.untracked.double(0.2),
                          MinNeutralPtSlope   = cms.untracked.double(0.015),
                          puppiAlgos = puppiForward

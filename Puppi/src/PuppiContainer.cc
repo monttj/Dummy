@@ -102,7 +102,8 @@ void PuppiContainer::getRMSAvg(int iOpt,std::vector<fastjet::PseudoJet> &iConsti
     fVals.push_back(pVal);
     if(std::isnan(pVal) || std::isinf(pVal)) cerr << "====> Value is Nan " << pVal << " == " << iConstits[i0].pt() << " -- " << iConstits[i0].eta() << endl;
     //if(isnan(pVal) || isinf(pVal))  edm::LogError( "NotFound" )  << "====> Value is Nan " << pVal << " == " << iConstits[i0].pt() << " -- " << iConstits[i0].eta() << endl;
-    if(std::isnan(pVal) || std::isinf(pVal)) continue;
+    if(std::isnan(pVal) || std::isinf(pVal)) pVal = 1.;
+    //if(std::isnan(pVal) || std::isinf(pVal)) continue;
     fPuppiAlgo[pPupId].add(iConstits[i0],pVal,iOpt);
   }
   for(int i0 = 0; i0 < fNAlgos; i0++) fPuppiAlgo[i0].computeMedRMS(iOpt,fPVFrac);
@@ -172,7 +173,11 @@ const std::vector<double> PuppiContainer::puppiWeights() {
     if(fRecoParticles[i0].id == 1 && fApplyCHS ) pWeight = 1;
     if(fRecoParticles[i0].id == 2 && fApplyCHS ) pWeight = 0;
       //Basic Weight Checks
-    if(std::isnan(pWeight)) std::cerr << "====> Weight is nan  : pt " << fRecoParticles[i0].pt << " -- eta : " << fRecoParticles[i0].eta << " -- Value" << fVals[i0] << " -- id :  " << fRecoParticles[i0].id << " --  NAlgos: " << lNAlgos << std::endl;
+    if(std::isnan(pWeight)) 
+    {
+      std::cerr << "====> Weight is nan  : pt " << fRecoParticles[i0].pt << " -- eta : " << fRecoParticles[i0].eta << " -- Value" << fVals[i0] << " -- id :  " << fRecoParticles[i0].id << " --  NAlgos: " << lNAlgos << std::endl;
+      pWeight=1.0;
+    }
     //Basic Cuts      
     if(pWeight                         < fPuppiWeightCut) pWeight = 0;  //==> Elminate the low Weight stuff
     if(pWeight*fPFParticles[i0].pt()   < fPuppiAlgo[pPupId].neutralPt(fNPV) && fRecoParticles[i0].id == 0 ) pWeight = 0;  //threshold cut on the neutral Pt
