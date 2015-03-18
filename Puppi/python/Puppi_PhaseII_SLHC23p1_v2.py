@@ -44,8 +44,8 @@ puppi = cms.PSet(#"PuppiProducer",
                        applyCHS       = cms.untracked.bool  (True),
                        useExp         = cms.untracked.bool  (False),
                        MinPuppiWeight = cms.untracked.double(0.1),
-                       algos          = cms.VPSet( 
-                        cms.PSet( 
+                       algos          = cms.VPSet(
+                        cms.PSet(
                          etaMin = cms.untracked.double( 0.),
                          etaMax = cms.untracked.double( 1.5),
                          ptMin  = cms.untracked.double(0.1),
@@ -53,27 +53,27 @@ puppi = cms.PSet(#"PuppiProducer",
                          MinNeutralPtSlope   = cms.untracked.double(0.005),
                          puppiAlgos = puppiCentral
                         ),
-                        cms.PSet( 
+                        cms.PSet(
                          etaMin = cms.untracked.double(1.5),
-                         etaMax = cms.untracked.double(3.8),
+                         etaMax = cms.untracked.double(3.0),
                          ptMin  = cms.untracked.double(0.1),
                          puppiAlgos = puppiCentral,
                          MinNeutralPt        = cms.untracked.double(1.0),
                          MinNeutralPtSlope   = cms.untracked.double(0.025),
                         ),
-#                        cms.PSet( 
+#                        cms.PSet(
 #                         etaMin = cms.untracked.double(2.5),
 #                         etaMax = cms.untracked.double(3.8),
 #                         ptMin  = cms.untracked.double(0.1),
 #                         puppiAlgos = puppiCentral
 #                        ),
-                        cms.PSet( 
-                         etaMin = cms.untracked.double(3.8),
+                        cms.PSet(
+                         etaMin = cms.untracked.double(3.0),
                          etaMax = cms.untracked.double(5.0),
-                         ptMin  = cms.untracked.double(4.0),
-                         MinNeutralPt   = cms.untracked.double(4.0),
-                         MinNeutralPtSlope   = cms.untracked.double(0.0),
-                         puppiAlgos = puppiForward
+                         ptMin  = cms.untracked.double(0.1),
+                         puppiAlgos = puppiForward,
+                         MinNeutralPt        = cms.untracked.double(1.0),
+                         MinNeutralPtSlope   = cms.untracked.double(0.05),
                         )
                       )
 )
