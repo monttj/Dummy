@@ -33,11 +33,12 @@ puppiForward = cms.VPSet(
 #                 )
                 )
 
-puppi = cms.PSet(#"PuppiProducer",
+puppi = cms.EDProducer("PuppiProducer",#cms.PSet(#"PuppiProducer",
                        PuppiName      = cms.untracked.string("Puppi"),
                        UseDeltaZCut   = cms.untracked.bool  (True),
                        DeltaZCut      = cms.untracked.double(0.3),
                        candName       = cms.untracked.string('particleFlow'),
+                       PFcandName     = cms.InputTag('particleFlow'),
                        vertexName     = cms.untracked.string('offlinePrimaryVertices'),
                        #candName      = cms.untracked.string('packedPFCandidates'),
                        #vertexName     = cms.untracked.string('offlineSlimmedPrimaryVertices'),
